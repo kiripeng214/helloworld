@@ -1,12 +1,12 @@
 package data
 
 import (
-	"helloworld/internal/conf"
 	"github.com/google/wire"
+	"helloworld/internal/conf"
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewGreeterRepo)
+var ProviderSet = wire.NewSet(NewData, NewStudentRepo)
 
 // Data .
 type Data struct {

@@ -14,90 +14,232 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// GreeterClient is the client API for Greeter service.
+// StudentServiceClient is the client API for StudentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GreeterClient interface {
-	// Sends a greeting
-	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
+type StudentServiceClient interface {
+	CreateStudent(ctx context.Context, in *CreateStudentRequest, opts ...grpc.CallOption) (*CreateStudentReply, error)
+	UpdateStudent(ctx context.Context, in *UpdateStudentRequest, opts ...grpc.CallOption) (*UpdateStudentReply, error)
+	DeleteStudent(ctx context.Context, in *DeleteStudentRequest, opts ...grpc.CallOption) (*DeleteStudentReply, error)
+	GetStudent(ctx context.Context, in *GetStudentRequest, opts ...grpc.CallOption) (*GetStudentReply, error)
+	ListStudent(ctx context.Context, in *ListStudentRequest, opts ...grpc.CallOption) (*ListStudentReply, error)
 }
 
-type greeterClient struct {
+type studentServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
-	return &greeterClient{cc}
+func NewStudentServiceClient(cc grpc.ClientConnInterface) StudentServiceClient {
+	return &studentServiceClient{cc}
 }
 
-func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
-	out := new(HelloReply)
-	err := c.cc.Invoke(ctx, "/helloworld.v1.Greeter/SayHello", in, out, opts...)
+func (c *studentServiceClient) CreateStudent(ctx context.Context, in *CreateStudentRequest, opts ...grpc.CallOption) (*CreateStudentReply, error) {
+	out := new(CreateStudentReply)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.StudentService/CreateStudent", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// GreeterServer is the server API for Greeter service.
-// All implementations must embed UnimplementedGreeterServer
+func (c *studentServiceClient) UpdateStudent(ctx context.Context, in *UpdateStudentRequest, opts ...grpc.CallOption) (*UpdateStudentReply, error) {
+	out := new(UpdateStudentReply)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.StudentService/UpdateStudent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studentServiceClient) DeleteStudent(ctx context.Context, in *DeleteStudentRequest, opts ...grpc.CallOption) (*DeleteStudentReply, error) {
+	out := new(DeleteStudentReply)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.StudentService/DeleteStudent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studentServiceClient) GetStudent(ctx context.Context, in *GetStudentRequest, opts ...grpc.CallOption) (*GetStudentReply, error) {
+	out := new(GetStudentReply)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.StudentService/GetStudent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studentServiceClient) ListStudent(ctx context.Context, in *ListStudentRequest, opts ...grpc.CallOption) (*ListStudentReply, error) {
+	out := new(ListStudentReply)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.StudentService/ListStudent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// StudentServiceServer is the server API for StudentService service.
+// All implementations must embed UnimplementedStudentServiceServer
 // for forward compatibility
-type GreeterServer interface {
-	// Sends a greeting
-	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
-	mustEmbedUnimplementedGreeterServer()
+type StudentServiceServer interface {
+	CreateStudent(context.Context, *CreateStudentRequest) (*CreateStudentReply, error)
+	UpdateStudent(context.Context, *UpdateStudentRequest) (*UpdateStudentReply, error)
+	DeleteStudent(context.Context, *DeleteStudentRequest) (*DeleteStudentReply, error)
+	GetStudent(context.Context, *GetStudentRequest) (*GetStudentReply, error)
+	ListStudent(context.Context, *ListStudentRequest) (*ListStudentReply, error)
+	mustEmbedUnimplementedStudentServiceServer()
 }
 
-// UnimplementedGreeterServer must be embedded to have forward compatible implementations.
-type UnimplementedGreeterServer struct {
+// UnimplementedStudentServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedStudentServiceServer struct {
 }
 
-func (UnimplementedGreeterServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
+func (UnimplementedStudentServiceServer) CreateStudent(context.Context, *CreateStudentRequest) (*CreateStudentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateStudent not implemented")
 }
-func (UnimplementedGreeterServer) mustEmbedUnimplementedGreeterServer() {}
+func (UnimplementedStudentServiceServer) UpdateStudent(context.Context, *UpdateStudentRequest) (*UpdateStudentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStudent not implemented")
+}
+func (UnimplementedStudentServiceServer) DeleteStudent(context.Context, *DeleteStudentRequest) (*DeleteStudentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteStudent not implemented")
+}
+func (UnimplementedStudentServiceServer) GetStudent(context.Context, *GetStudentRequest) (*GetStudentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStudent not implemented")
+}
+func (UnimplementedStudentServiceServer) ListStudent(context.Context, *ListStudentRequest) (*ListStudentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListStudent not implemented")
+}
+func (UnimplementedStudentServiceServer) mustEmbedUnimplementedStudentServiceServer() {}
 
-// UnsafeGreeterServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GreeterServer will
+// UnsafeStudentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to StudentServiceServer will
 // result in compilation errors.
-type UnsafeGreeterServer interface {
-	mustEmbedUnimplementedGreeterServer()
+type UnsafeStudentServiceServer interface {
+	mustEmbedUnimplementedStudentServiceServer()
 }
 
-func RegisterGreeterServer(s grpc.ServiceRegistrar, srv GreeterServer) {
-	s.RegisterService(&Greeter_ServiceDesc, srv)
+func RegisterStudentServiceServer(s grpc.ServiceRegistrar, srv StudentServiceServer) {
+	s.RegisterService(&StudentService_ServiceDesc, srv)
 }
 
-func _Greeter_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloRequest)
+func _StudentService_CreateStudent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateStudentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GreeterServer).SayHello(ctx, in)
+		return srv.(StudentServiceServer).CreateStudent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/helloworld.v1.Greeter/SayHello",
+		FullMethod: "/helloworld.v1.StudentService/CreateStudent",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GreeterServer).SayHello(ctx, req.(*HelloRequest))
+		return srv.(StudentServiceServer).CreateStudent(ctx, req.(*CreateStudentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Greeter_ServiceDesc is the grpc.ServiceDesc for Greeter service.
+func _StudentService_UpdateStudent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateStudentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudentServiceServer).UpdateStudent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.v1.StudentService/UpdateStudent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudentServiceServer).UpdateStudent(ctx, req.(*UpdateStudentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudentService_DeleteStudent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteStudentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudentServiceServer).DeleteStudent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.v1.StudentService/DeleteStudent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudentServiceServer).DeleteStudent(ctx, req.(*DeleteStudentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudentService_GetStudent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStudentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudentServiceServer).GetStudent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.v1.StudentService/GetStudent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudentServiceServer).GetStudent(ctx, req.(*GetStudentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudentService_ListStudent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStudentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudentServiceServer).ListStudent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.v1.StudentService/ListStudent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudentServiceServer).ListStudent(ctx, req.(*ListStudentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// StudentService_ServiceDesc is the grpc.ServiceDesc for StudentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Greeter_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "helloworld.v1.Greeter",
-	HandlerType: (*GreeterServer)(nil),
+var StudentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "helloworld.v1.StudentService",
+	HandlerType: (*StudentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SayHello",
-			Handler:    _Greeter_SayHello_Handler,
+			MethodName: "CreateStudent",
+			Handler:    _StudentService_CreateStudent_Handler,
+		},
+		{
+			MethodName: "UpdateStudent",
+			Handler:    _StudentService_UpdateStudent_Handler,
+		},
+		{
+			MethodName: "DeleteStudent",
+			Handler:    _StudentService_DeleteStudent_Handler,
+		},
+		{
+			MethodName: "GetStudent",
+			Handler:    _StudentService_GetStudent_Handler,
+		},
+		{
+			MethodName: "ListStudent",
+			Handler:    _StudentService_ListStudent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "greeter.proto",
+	Metadata: "api/helloworld/v1/greeter.proto",
 }
