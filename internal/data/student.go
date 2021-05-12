@@ -20,5 +20,17 @@ func NewStudentRepo(data *Data, logger log.Logger) biz.StudentRepo {
 }
 
 func (s studentRepo) ListStudent(ctx context.Context) ([]*biz.Student, error) {
-	panic("implement me")
+	ps, err := s.data.db.Debug().Student.Query().All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	rv := make([]*biz.Student, 0)
+	for i := range ps {
+		rv = append(rv, &biz.Student{
+			Id:   ps[i].ID,
+			Name: ps[i].Name,
+			Age:  ps[i].Age,
+		})
+	}
+	return rv, nil
 }
